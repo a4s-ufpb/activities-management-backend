@@ -8,5 +8,6 @@ public interface QuestaoRepository {
 
 	List<Questao> todas();
 	Questao adicionar(Questao questao);
-	
+	Questao BuscarPorID(Long id);
+	void remover(Long id);
 }

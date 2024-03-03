@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 import apps4Society.domain.model.Questao;
 import apps4Society.domain.repository.QuestaoRepository;
+import apps4Society.infrastructure.repository.exception.NaoEncontradoException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
@@ -26,7 +27,23 @@ public class QuestaoRepositoryImpl implements QuestaoRepository {
 	@Transactional
 	@Override
 	public Questao adicionar(Questao questao) {
-		return manager.merge(null);
+		return manager.merge(questao);
+	}
+
+	@Override
+	public Questao BuscarPorID(Long id) {
+		return manager.find(Questao.class, id);
+	}	
+
+	@Transactional
+	@Override
+	public void remover(Long id) {
+		Questao questao = BuscarPorID(id);
+		
+		if(questao == null)
+			throw new NaoEncontradoException("1");
+//		IllegalArgumentException TRATAR
+		manager.remove(questao);
 	}
 
 }
