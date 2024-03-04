@@ -5,19 +5,20 @@ import java.util.List;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import apps4Society.domain.model.RespostaUsuario;
 import apps4Society.domain.service.RespostaUsuarioService;
-import apps4Society.domain.service.exception.ObjetoEmUsoException;
 import apps4Society.domain.service.exception.ObjetoNaoEncontradoException;
 
-@Service
+@Controller
+@RequestMapping("/respostaUsuario")
 public class RespostaUsuarioController {
 
 	@Autowired RespostaUsuarioService respostaUsuarioService;
@@ -37,8 +38,8 @@ public class RespostaUsuarioController {
 		return ResponseEntity.notFound().build();
 	}
 	
-	@PostMapping
-	public ResponseEntity<RespostaUsuario> adicionar(RespostaUsuario respostaUsuario){
+	@PostMapping()
+	public ResponseEntity<RespostaUsuario> adicionar(@RequestBody RespostaUsuario respostaUsuario){
 		return ResponseEntity.ok(respostaUsuarioService.salvar(respostaUsuario));
 	}
 	
@@ -64,10 +65,11 @@ public class RespostaUsuarioController {
 		} catch (ObjetoNaoEncontradoException e) {
 			return ResponseEntity.notFound().build();
 
-		} catch (ObjetoEmUsoException e) {
-			return ResponseEntity.badRequest().build();
-					
-		}
+		} 
+//		catch (ObjetoEmUsoException e) {
+//			return ResponseEntity.badRequest().build();
+//					
+//		}
 	}
 	
 	

@@ -34,7 +34,7 @@ public class UsuarioService {
 		try {
 			usuarioRepository.remover(id);
 		} catch (NaoEncontradoException e) {
-			throw new ObjetoNaoEncontradoException(String.format("Não existe uma questão com o ID: %d", id));
+			throw new ObjetoNaoEncontradoException(String.format("Não existe uma usuario com o ID: %d", id));
 		} catch (DataIntegrityViolationException e) {
 			throw new ObjetoEmUsoException(String.format("Usuário de código %d não pode ser removida, pois está em uso",id));
 		}

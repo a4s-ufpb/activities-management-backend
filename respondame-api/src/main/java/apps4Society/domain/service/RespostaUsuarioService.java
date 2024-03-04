@@ -3,12 +3,14 @@ package apps4Society.domain.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import apps4Society.domain.model.RespostaUsuario;
 import apps4Society.domain.repository.RespostaUsuarioRepository;
 import apps4Society.domain.service.exception.ObjetoNaoEncontradoException;
 import apps4Society.infrastructure.repository.exception.NaoEncontradoException;
 
+@Service
 public class RespostaUsuarioService {
 
 	@Autowired RespostaUsuarioRepository respostaUsuarioRepository;
